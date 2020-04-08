@@ -11,3 +11,4 @@ mongoose
   .then(() => console.log('DB connection successful'));
 
 module.exports.User = require('./User');
+module.exports.Profile = require('./Profile');

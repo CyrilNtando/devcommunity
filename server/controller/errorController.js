@@ -35,6 +35,6 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || 'error';
   let error = Object.assign({}, err, { message: err.message });
   if (error.code === 11000) error = handleDuplicateFields(error);
-  if (error.name === 'validationError') error = handleValidationErrorDB(error);
+  if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
   dispatchError(error, res);
 };

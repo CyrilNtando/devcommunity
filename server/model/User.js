@@ -5,6 +5,8 @@ userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please provide your name'],
+    trim: true,
+    maxlength: [40, 'A  name must have less or equal 40 characters'],
     unique: true,
   },
   email: {
@@ -18,13 +20,13 @@ userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Please provide a password'],
-    maxlength: 8,
+    maxlength: [8, 'Password must have less or equal 40 characters'],
     select: false,
   },
   passwordConfirm: {
     type: String,
     required: [true, 'Please conform your password'],
-    maxlength: 8,
+    maxlength: [8, 'Password Confirm must have less or equal 40 characters'],
     validate: function (value) {
       return value === this.password;
     },
