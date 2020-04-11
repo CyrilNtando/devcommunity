@@ -22,6 +22,7 @@ const dispatchError = (error, res) => {
     });
     //Programming or other unknown error: don't leak error details
   } else {
+    console.log(error);
     res.status(500).json({
       status: 'error',
       message: 'something went wrong',

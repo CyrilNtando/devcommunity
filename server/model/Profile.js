@@ -6,6 +6,7 @@ const profileSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User',
     unique: true,
+    required: [true, 'Profile must have a user'],
   },
   handle: {
     type: String,
@@ -49,6 +50,13 @@ const profileSchema = new mongoose.Schema({
   ],
 });
 
-const Profile = mongoose.model('Profile', profileSchema);
+profileSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: 'name avatar',
+  });
+  next();
+});
 
+const Profile = mongoose.model('Profile', profileSchema);
 module.exports = Profile;

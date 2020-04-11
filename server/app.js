@@ -3,6 +3,7 @@ express = require('express');
 const AppError = require('./utils/appError');
 const errorHandler = require('./controller/errorController');
 const userRoutes = require('./routes/userRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 const app = express();
 
 //MIDDLEWARE
@@ -13,6 +14,7 @@ app.use(express.json({ limit: '1000kb' })); //parse data less than 10kb
 
 //MOUNT ROUTES
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/profile', profileRoutes);
 
 //ROUTE NOT FOUND
 app.all('*', (req, res, next) => {

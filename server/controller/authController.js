@@ -28,7 +28,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   createToken(newUser, 201, res);
 });
 
-/*********************Create Token*******************************/
+/*********************Tokens*******************************/
 const signToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -57,4 +57,31 @@ const createToken = (user, statusCode, res) => {
   });
 };
 
-/*********************End of Create Token*******************************/
+/*********************End of Token*******************************/
+
+/*********************Protecting Routes*******************************/
+exports.protect = catchAsync(async (req, res, next) => {
+  //getting token and check if it exists
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+  if (!token)
+    return next(
+      new AppError('You are not logged in! Please log in to get access.', 401)
+    );
+
+  //validate token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  //check if user exists
+  const currentUser = await db.User.findById(decoded.id);
+  if (!currentUser)
+    return next(new AppError('The user does no longer exist', 401));
+  //GRANT ACCESS TO PROTECTED ROUTE
+  req.user = currentUser;
+  next();
+});
+/*********************End of Protecting Routes*******************************/
