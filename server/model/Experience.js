@@ -3,18 +3,18 @@ const mongoose = require('mongoose');
 const experienceSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: [true, 'A job must have a title'],
   },
   company: {
     type: String,
-    required: true,
+    required: [true, 'A job must have a company name'],
   },
   location: {
     type: String,
   },
   from: {
     type: Date,
-    required: true,
+    required: [true, 'Please provide a starting date'],
   },
 
   to: {
@@ -29,6 +29,4 @@ const experienceSchema = new mongoose.Schema({
   },
 });
 
-const Experience = mongoose.model('Experience', experienceSchema);
-
-module.exports = Experience;
+module.exports = experienceSchema;

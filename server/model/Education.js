@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-EducationSchema = mongoose.Schema({
+const Profile = require('./Profile');
+const educationSchema = new mongoose.Schema({
   school: {
     type: String,
     required: [true, 'A institution must have a name'],
@@ -9,10 +9,6 @@ EducationSchema = mongoose.Schema({
   degree: {
     type: String,
     required: [true, 'A course must have an qualification'],
-    maxlength: [
-      40,
-      'A qualification name must have less or equal 40 characters',
-    ],
     enum: {
       values: ['certificate', 'diploma', 'degree'],
       message: 'qualification is either: certificate, diploma or degree ',
@@ -21,10 +17,14 @@ EducationSchema = mongoose.Schema({
   course: {
     type: String,
     required: [true, 'A course must have a name'],
+    maxlength: [
+      40,
+      'A qualification name must have less or equal 40 characters',
+    ],
   },
   from: {
     type: Date,
-    required: [true, 'Please provide date of enrollment'],
+    default: Date.now(), // required: [true, 'Please provide date of enrollment'],
   },
 
   to: {
@@ -38,3 +38,5 @@ EducationSchema = mongoose.Schema({
     type: String,
   },
 });
+
+module.exports = educationSchema;

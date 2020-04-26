@@ -14,7 +14,7 @@ app.use(express.json({ limit: '1000kb' })); //parse data less than 10kb
 
 //MOUNT ROUTES
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/profile', profileRoutes);
+app.use('/api/v1/profiles', profileRoutes);
 
 //ROUTE NOT FOUND
 app.all('*', (req, res, next) => {

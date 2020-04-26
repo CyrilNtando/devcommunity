@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./User');
-
+const educationSchema = require('./Education');
+const experienceSchema = require('./Experience');
 const profileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
@@ -36,25 +37,32 @@ const profileSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  experience: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Experience',
-    },
-  ],
-  education: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Education',
-    },
-  ],
+  experience: [experienceSchema],
+  education: [educationSchema],
 });
 
+profileSchema.statics.updateSubDocument = function (
+  userId,
+  embeddedId,
+  subDocument,
+  updateData
+) {
+  return this.findOne({ user: userId })
+    .then(function (doc) {
+      if (!doc) {
+        throw new Error('Document not found');
+      }
+      return doc[subDocument].id(embeddedId);
+    })
+    .then(function (embeddedDoc) {
+      if (!embeddedDoc) {
+        throw new Error('Embedded document not found');
+      }
+      return Object.assign(embeddedDoc, updateData);
+    });
+};
+
 profileSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'user',
-    select: 'name avatar',
-  });
   next();
 });
 
