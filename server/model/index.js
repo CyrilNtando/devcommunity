@@ -14,4 +14,3 @@ module.exports.User = require('./User');
 module.exports.Profile = require('./Profile');
 module.exports.Post = require('./Post');
 module.exports.Comment = require('./Comment');
-module.exports.Like = require('./Like');

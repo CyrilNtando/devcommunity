@@ -25,7 +25,7 @@ const postSchema = new mongoose.Schema({
   like: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: 'Like',
+      ref: 'User',
     },
   ],
   createdAt: {
@@ -33,6 +33,7 @@ const postSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
+postSchema.index({ _id: 1, user: 1 }, { unique: true });
 
 const Post = mongoose.model('Post', postSchema);
 
