@@ -1,7 +1,7 @@
 const db = require('../model');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-
+const subHandler = require('../utils/subDocumentHandler');
 exports.getAllProfiles = catchAsync(async (req, res, next) => {
   const profiles = await db.Profile.find();
 
@@ -78,49 +78,12 @@ exports.deleteProfile = catchAsync(async (req, res, next) => {
 /****************************************************
  *  EDUCATION HANDLERS
  ******************************************************/
-exports.createEduction = catchAsync(async (req, res, next) => {
-  let profile = await db.Profile.findOne({ user: req.user._id });
-  if (!profile) return next(new AppError('No profile found', 404));
-  const userProps = { ...req.body };
-  profile.education.unshift(userProps);
-  await profile.save();
-  res.status(200).json({
-    status: 'success',
-    data: {
-      profile,
-    },
-  });
-});
-exports.updateEducation = catchAsync(async (req, res, next) => {
-  let profile = await db.Profile.findOne({ user: req.user.id });
-  if (!profile) return next(new AppError('No profile found', 404));
-  //Get document and check if index exists
-  const index = profile.education.map((item) => item.id).indexOf(req.params.id);
-  if (index < 0) return next(new AppError('No qualification found', 404));
-  //update
-  const temp = profile.education[index];
-  const updateData = Object.assign(temp, req.body);
-
-  profile.education[index] = updateData;
-
-  await profile.save();
-  res.status(200).json({
-    status: 'success',
-    data: {
-      profile,
-    },
-  });
-});
-
-exports.deleteEducation = catchAsync(async (req, res, next) => {
-  const profile = await db.Profile.findOne({ user: req.user._id });
-  if (!profile) return next(new AppError('No profile found', 404));
-  profile.education.pull(req.params.id);
-  await profile.save();
-  res.status(204).json({
-    status: 'success',
-  });
-});
+exports.createEduction = subHandler.createDocument(db.Profile, 'education');
+exports.updateEducation = subHandler.updateDocument(db.Profile, 'education');
+exports.deleteEducation = subHandler.deleteDocument(db.Profile, 'education');
 /****************************************************
  *  EXPERIENCE HANDLERS
  ******************************************************/
+exports.createExperience = subHandler.createDocument(db.Profile, 'experience');
+exports.updateExperience = subHandler.updateDocument(db.Profile, 'experience');
+exports.deleteExperience = subHandler.deleteDocument(db.Profile, 'experience');
