@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controller/authController');
-const postController = require('../controller/PostController');
+const postController = require('../controller/postController');
 const comment = require('./commentRoutes');
 
 //api/v1/post/:postId/comment
@@ -22,6 +22,6 @@ router
 router
   .route('/:postId/like')
   .post(authController.protect, postController.likePost)
-  .delete(authController.protect, postController.deletePost);
+  .patch(authController.protect, postController.unlikePost);
 
 module.exports = router;
