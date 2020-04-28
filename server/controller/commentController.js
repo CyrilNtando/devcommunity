@@ -3,7 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 const appError = require('../utils/appError');
 
 exports.getAllComment = catchAsync(async function (req, res, next) {
-  const comment = await db.Comment.find();
+  const comment = await db.Comment.find({ post: req.params.postId });
   res.status(200).json({
     status: 'success',
     data: {
@@ -11,6 +11,7 @@ exports.getAllComment = catchAsync(async function (req, res, next) {
     },
   });
 });
+
 exports.createComment = catchAsync(async function (req, res, next) {
   const newComment = await db.Comment.create({
     user: req.user._id,
@@ -42,9 +43,8 @@ exports.updateComment = catchAsync(async function (req, res, next) {
     },
   });
 });
-
 exports.deleteComment = catchAsync(async function (req, res, next) {
-  const comment = await findById(req.params.commentId);
+  const comment = await db.Comment.findById(req.params.commentId);
   if (!comment) return next(new appError('no comment found', 404));
   comment.remove();
   res.status(204).json({

@@ -5,6 +5,7 @@ const errorHandler = require('./controller/errorController');
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 const app = express();
 
 //MIDDLEWARE
@@ -17,6 +18,7 @@ app.use(express.json({ limit: '1000kb' })); //parse data less than 10kb
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/profiles', profileRoutes);
 app.use('/api/v1/post', postRoutes);
+app.use('/api/v1/comment', commentRoutes);
 
 //ROUTE NOT FOUND
 app.all('*', (req, res, next) => {

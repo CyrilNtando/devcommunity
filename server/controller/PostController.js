@@ -3,7 +3,9 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 exports.getAllPost = catchAsync(async function (req, res, next) {
-  const posts = await db.Post.find().sort({ createdAt: -1 });
+  const posts = await db.Post.find()
+    .populate('comments')
+    .sort({ createdAt: -1 });
   res.status(200).json({
     status: 'success',
     data: {
