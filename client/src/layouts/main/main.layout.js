@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Homepage from '../pages/home.page';
-import Post from '../pages/post.page';
-import Auth from '../pages/auth.page';
-import Dashboard from '../pages/dashboard.page';
-import Developer from '../pages/developer.page';
+import Homepage from '../../pages/homepage/home.page';
+import Post from '../../pages/post/post.page';
+import Auth from '../../pages/auth-page/auth.page';
+import Dashboard from '../../pages/dashboard/dashboard.page';
+import Developer from '../../pages/developer/developer.page';
 class Main extends Component {
   render() {
     return (
