@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles, withTheme } from '@material-ui/styles';
 import {
   RootContainer,
@@ -18,23 +19,29 @@ const MenuAppBar = () => {
   const [anchorEl, handleChange, handleMenu, handleClose] = useMenuState(null);
   return (
     <RootContainer>
-      <AppBar position='static' color='default'>
+      <AppBar position='fixed' color='default'>
         <Toolbar>
           <StyledContainer maxWidth='lg'>
             <LeftNavContainer>
-              <Typography variant='h6'>Dev Community</Typography>
-              <Button>Developers</Button>
+              <Typography variant='h6'>
+                <Link className='nav__link' to='/'>
+                  Dev Community
+                </Link>
+              </Typography>
+              <Button component={Link} to="/developer'">
+                Developers
+              </Button>
             </LeftNavContainer>
-
             <RightNavContainer>
               <Button
+                component={Link}
+                to='/sign-in'
                 className='spacingRight'
-                variant='outlined'
                 color='primary'
               >
                 Sign In
               </Button>
-              <Button variant='contained' color='primary'>
+              <Button component={Link} to='/sign-up' color='primary'>
                 Sign Up
               </Button>
               <IconButton

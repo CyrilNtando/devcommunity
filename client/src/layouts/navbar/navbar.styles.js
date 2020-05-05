@@ -25,7 +25,11 @@ export const RightNavContainer = styled.div`
 export const LeftNavContainer = styled.div`
   ${middleCenter}
   justify-content: space-between;
-  button {
-    margin-left: 30px;
+  & .nav__link,
+  & .nav__link:link,
+  & .nav__link:visited {
+    text-decoration: none;
+    color: inherit;
+    margin-right: 30px;
   }
 `;
