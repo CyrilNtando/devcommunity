@@ -18,7 +18,7 @@ export const StyledContainer = styled(Container)`
 export const RightNavContainer = styled.div`
   ${middleCenter}
   justify-content: space-between;
-  button:not(:last-child) {
+  & .spacingRight {
     margin-right: 30px;
   }
 `;

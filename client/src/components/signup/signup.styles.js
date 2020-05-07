@@ -5,7 +5,7 @@ export const PaperContainer = styled(Paper)`
   margin: 1rem 0;
   padding: 0 1.5rem;
   padding-bottom: 1.5rem;
-  & > div {
+  & .spacing {
     margin-bottom: 1.5rem;
   }
 `;

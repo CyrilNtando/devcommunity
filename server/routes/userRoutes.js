@@ -1,9 +1,11 @@
 const express = require('express');
-const { signup, login } = require('../controller/authController');
+const userController = require('../controller/userController');
+const authController = require('../controller/authController');
 const router = express.Router();
 
 /*/api/v1/users**/
-router.post('/signup', signup);
-router.post('/login', login);
+router.post('/signup', userController.signup);
+router.post('/login', userController.login);
+router.get('/me', authController.protect, userController.getCurrentUser);
 
 module.exports = router;

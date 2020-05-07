@@ -1,5 +1,5 @@
 express = require('express');
-
+const cookieParser = require('cookie-parser');
 const AppError = require('./utils/appError');
 const errorHandler = require('./controller/errorController');
 const userRoutes = require('./routes/userRoutes');
@@ -12,8 +12,14 @@ const app = express();
 
 //
 //body-parser,reading data from body into req.body
-app.use(express.json({ limit: '1000kb' })); //parse data less than 10kb
+app.use(express.json({ limit: '1000kb' })); //parse data less than 1000kb
+app.use(cookieParser());
 
+//test
+app.use((req, res, next) => {
+  console.log(req.cookies);
+  next();
+});
 //MOUNT ROUTES
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/profiles', profileRoutes);

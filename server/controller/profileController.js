@@ -12,7 +12,7 @@ exports.getAllProfiles = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      data: profiles,
+      profiles,
     },
   });
 });
@@ -42,7 +42,7 @@ exports.createProfile = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     data: {
-      data: newProfile,
+      profile: newProfile,
     },
   });
 });

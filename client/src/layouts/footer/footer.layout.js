@@ -23,7 +23,7 @@ export default class Footer extends Component {
   render() {
     return (
       <FooterContainer>
-        <Typography variant='paragraph'>
+        <Typography paragraph={true}>
           Copyright 2018 Developer Community
         </Typography>
       </FooterContainer>

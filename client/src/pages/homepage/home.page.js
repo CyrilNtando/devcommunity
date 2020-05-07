@@ -8,10 +8,10 @@ export default class HomePage extends Component {
     return (
       <HomeContainer>
         <HeaderBoxContainer>
-          <Typography variant='h1' color='#fff'>
+          <Typography variant='h1' color='initial'>
             Developer Community
           </Typography>
-          <Typography paragraph='true' color='#fff'>
+          <Typography paragraph={true} color='initial'>
             Create a developer profile/portfolio, share posts and get help from
             other developers
           </Typography>

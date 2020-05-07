@@ -21,7 +21,7 @@ class Main extends Component {
           render={(props) => <Auth signup {...props} />}
         />
         <Route path='/developer' exact component={Developer} />
-        <Route path='/post' exact component={Post} />
+        <Route path='/posts' exact component={Post} />
         <Route path='/dashboard' exact component={Dashboard} />
       </Switch>
     );
