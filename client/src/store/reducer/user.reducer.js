@@ -9,17 +9,17 @@ const userState = (state = DEFAULT_STATE, action) => {
     case UserTypes.SIGN_UP_USER:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
       };
     case UserTypes.SIGN_IN_USER:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
       };
-    case UserTypes.SET_CURRENT_USER:
+    case UserTypes.AUTH_USER:
       return {
         ...state,
-        isAuthenticated: !!Object.keys(action.payload.user._id).length > 0,
+        isAuthenticated: !!Object.keys(action.payload.user).length > 0,
         user: action.payload.user,
       };
     default:

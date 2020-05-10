@@ -16,19 +16,23 @@ function SignIn() {
       <Typography variant='h3'>Welcome back, Sign in</Typography>
       <PaperContainer>
         <TextField
+          required={true}
+          type='email'
           name='email'
           value={email}
           onChange={handleChange}
           margin='normal'
-          label='Email*'
+          label='Email'
           fullWidth
         />
         <TextField
+          required={true}
+          type='password'
           name='password'
           value={password}
           onChange={handleChange}
           margin='normal'
-          label='Password*'
+          label='Password'
           fullWidth
         />
 

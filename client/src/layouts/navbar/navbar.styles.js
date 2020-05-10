@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
-import { Container } from '@material-ui/core';
+import { Container, AppBar } from '@material-ui/core';
 
 const middleCenter = css`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
-
-export const RootContainer = styled.div`
-  flex-grow: 1;
+export const AppBarContainer = styled(AppBar)`
+  height: 4.37rem;
 `;
 export const StyledContainer = styled(Container)`
   ${middleCenter}
